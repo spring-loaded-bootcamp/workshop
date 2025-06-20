@@ -355,6 +355,106 @@ hello.text=Hujambo!?!?
 
 ### v0.0.4
 
+## A better way?
+
+We don't want to have to redeploy our code everytime we change a configuration value.
+
+```xml
+	<properties>
+		<java.version>17</java.version>
+		<project.build.outputDirectory>null</project.build.outputDirectory>
+		<spring-cloud.version>2025.0.0</spring-cloud.version>
+		<spring-modulith.version>1.4.0</spring-modulith.version>
+		<spring-restdocs.version>3.0.3</spring-restdocs.version>
+	</properties>
+```
+> Update properties section
+
+```xml
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-config</artifactId>
+    </dependency>
+```
+> Add dependency
+
+```xml
+    <dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.modulith</groupId>
+				<artifactId>spring-modulith-bom</artifactId>
+				<version>${spring-modulith.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+```
+> Update dependencyManagement to include Spring Cloud
+
+## That won't start
+
+[Generate a Config Server](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.5.3&packaging=jar&jvmVersion=17&groupId=com.example.service&artifactId=configserver&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.service.config&dependencies=cloud-config-server,actuator)
+
+```bash
+cd ..
+unzip ~/Downloads/configserver.zip
+cd configserver
+sdk use java 17.0.15-librca
+sdk env init
+idea .
+```
+
+## Enable Configuration Server
+
+```java
+package com.example.service.configserver;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.config.server.EnableConfigServer;
+
+@SpringBootApplication
+@EnableConfigServer
+public class Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+
+}
+```
+> Application.java
+
+```text
+spring.application.name=configserver
+
+server.port=8888
+spring.cloud.config.server.git.uri=https://github.com/spring-loaded-bootcamp/config.git
+```
+> src/main/resources/application.properties
+
+```bash
+./mvnw spring-boot:run
+```
+
+## deploy it
+
+```bash
+./mvnw spring-boot:build-image
+
+docker run -p 8888:8888 configserver:0.0.1-SNAPSHOT
+```
+
+
 ## Spring Cloud Gateway
 
 
