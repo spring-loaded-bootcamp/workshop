@@ -400,6 +400,24 @@ We don't want to have to redeploy our code everytime we change a configuration v
 ```
 > Update dependencyManagement to include Spring Cloud
 
+```text
+spring.application.name=hello
+
+management.endpoints.web.exposure.include=*
+management.endpoint.health.show-details=always
+management.endpoint.env.show-values=always
+management.info.env.enabled=true
+management.info.java.enabled=true
+management.info.os.enabled=true
+management.info.process.enabled=true
+server.port=8080
+
+hello.text=Hujambo!?!?
+
+spring.config.import=configserver:
+```
+> src/main/resources/application.properties
+
 ## That won't start
 
 [Generate a Config Server](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.5.3&packaging=jar&jvmVersion=17&groupId=com.example.service&artifactId=configserver&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.service.config&dependencies=cloud-config-server,actuator)
@@ -453,6 +471,10 @@ spring.cloud.config.server.git.uri=https://github.com/spring-loaded-bootcamp/con
 
 docker run -p 8888:8888 configserver:0.0.1-SNAPSHOT
 ```
+
+## Lets go to production
+
+
 
 
 ## Spring Cloud Gateway
