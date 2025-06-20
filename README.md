@@ -474,6 +474,14 @@ docker run -p 8888:8888 configserver:0.0.1-SNAPSHOT
 
 ## Lets go to production
 
+```text
+git clone https://github.com/spring-loaded-bootcamp/compose
+```
+> Put it at the top level of the workshop
+
+```bash
+docker compose up -d
+```
 
 
 
