@@ -319,6 +319,7 @@ docker stats <containerId>
 ## Build a smaller image
 
 ```bash
+sdk install java 23.0.8.r17-nik
 sdk use java 23.0.8.r17-nik 
 ./mvnw -Pnative spring-boot:build-image
 ```
