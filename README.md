@@ -145,7 +145,7 @@ Documentation will be in `target/spring-modulith-docs`
         <java.version>17</java.version>
         <project.build.outputDirectory>null</project.build.outputDirectory>
         <spring-modulith.version>1.4.0</spring-modulith.version>
-        <spring-restdocs.version>3.0.4</spring-restdocs.version>
+        <spring-restdocs.version>3.0.3</spring-restdocs.version>
     </properties>
 ```
 > Update properties
@@ -272,6 +272,14 @@ class HelloControllerTest {
 
 ```bash
 ./mvnw clean package
+```
+
+## Build an image
+
+Docker needs to be running for this part:
+
+```bash
+./mvnw spring-boot:build-image
 ```
 
 
