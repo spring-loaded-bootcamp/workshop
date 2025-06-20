@@ -241,6 +241,28 @@ As you can see the format is very simple, and in fact you always get the same me
 ## Add RestDocs Test
 
 ```java
+package com.example.modulith.simple.hello;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.restdocs.RestDocumentationContextProvider;
+import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @WebMvcTest(HelloController.class)
 class HelloControllerTest {
@@ -281,6 +303,11 @@ Docker needs to be running for this part:
 ```bash
 ./mvnw spring-boot:build-image
 ```
+
+```bash
+docker run -p 8080:8080 simple:0.0.1-SNAPSHOT
+```
+> ctrl+c to stop it
 
 
 v1
