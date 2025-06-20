@@ -484,30 +484,17 @@ docker compose up -d
 ```
 
 
-
 ## Spring Cloud Gateway
 
+## Config Refresh
 
+## Ngrok
+
+## Observability
+
+## Spring AI
 
 ## Let's talk about AOT, CDS, and Native Images
-
-
-
-v1
-image
-deploy
-
-Add logs
-Add Loki
-
-
-Add Eureka Client
-Spring Cloud Gateway
-- parameterize hello world
-add config client
-Spring Cloud Config Server
-deploy v2 and v1
-
 
 ## Now how do I get a (better) job with what I've learned here
 
