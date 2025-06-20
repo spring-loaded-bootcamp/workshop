@@ -33,6 +33,12 @@ HelloController
 ## Update the class
 
 ```java
+package com.example.modulith.simple.hello;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 @Controller
 @ResponseBody
 class HelloController {
@@ -45,7 +51,7 @@ class HelloController {
 }
 ```
 
-## Look around
+## Start the app and Look around
 
 - [http://localhost:8080/](http://localhost:8080)
 - [http://localhost:8080/hello](http://localhost:8080/hello)
@@ -70,7 +76,7 @@ server.port=8080
 ```
 >src/main/resources/application.properties
 
-## Look around
+## Restart the app and Look around
 
 - [http://localhost:8080/](http://localhost:8080)
 - [http://localhost:8080/hello](http://localhost:8080/hello)
@@ -114,6 +120,10 @@ class ModularityTests {
 }
 ```
 > src/test/java/com/example/modulith/simple/ModularityTests.java
+
+## Run all the tests and generate the documentation
+
+Documentation will be in `target/spring-modulith-docs`
 
 ## Test the endpoint and the other TDD, Test Driven Documentation
 
@@ -198,6 +208,23 @@ As you can see the format is very simple, and in fact you always get the same me
 ```
 > src/main/asciidoc/hello.adoc
 
+## Add a document root that points to the docs
+
+```html
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Test Driven Documentation::The other TDD</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p>Use the API <a href="/hello">here</a></p>
+<p>The documentation is published <a href="docs/hello.html">here</a></p>
+</body>
+</html>
+```
+> src/main/resources/static/index.html
+
 ## Add RestDocs Test
 
 ```java
@@ -222,11 +249,18 @@ class HelloControllerTest {
         this.mockMvc.perform(get("/hello"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Hello, World")))
+                .andExpect(content().string(containsString("Hello World")))
                 .andDo(document("hello"));
     }
 }
 ```
+
+## Lets rebuild everything with documentation
+
+```bash
+./mvnw clean package
+```
+
 
 v1
 image
