@@ -18,6 +18,8 @@ idea .
 ```
 > Open the new project in IntelliJ
 
+### v0.0.0
+
 ## Make a new package
 
 ```text
@@ -123,13 +125,6 @@ class ModularityTests {
                 .writeIndividualModulesAsPlantUml();
     }
 
-    @Test
-    void writeDocumentationSnippets() {
-
-        new Documenter(modules)
-                .writeAggregatingDocument();
-    }
-
 }
 ```
 > src/test/java/com/example/modulith/simple/ModularityTests.java
@@ -137,6 +132,8 @@ class ModularityTests {
 ## Run all the tests and generate the documentation
 
 Documentation will be in `target/spring-modulith-docs`
+
+### v0.0.1
 
 ## Test the endpoint and the other TDD, Test Driven Documentation
 
@@ -289,6 +286,9 @@ class HelloControllerTest {
     }
 }
 ```
+> src/test/java/com/example/modulith/simple/hello/HelloControllerTest.java
+
+### v0.0.2
 
 ## Lets rebuild everything with documentation
 
@@ -323,6 +323,26 @@ sdk install java 23.0.8.r17-nik
 sdk use java 23.0.8.r17-nik 
 ./mvnw -Pnative spring-boot:build-image
 ```
+> How come this didn't work?
+
+## Update properties
+
+```text
+management.server.port=8081
+```
+> Remove that line from src/main/resources/application.properties
+
+Try again
+
+```bash
+./mvnw -Pnative spring-boot:build-image
+```
+
+### v0.0.3
+
+## Let's talk about AOT, CDS, and Native Images
+
+
 
 v1
 image
