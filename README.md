@@ -305,10 +305,23 @@ Docker needs to be running for this part:
 ```
 
 ```bash
-docker run -p 8080:8080 simple:0.0.1-SNAPSHOT
+docker run -p 8080:8080 -p 8081:8081 simple:0.0.1-SNAPSHOT
 ```
 > ctrl+c to stop it
 
+## Check the stats
+
+```bash
+docker ps #To get the containerId
+docker stats <containerId>
+```
+
+## Build a smaller image
+
+```bash
+sdk use java 23.0.8.r17-nik 
+./mvnw -Pnative spring-boot:build-image
+```
 
 v1
 image
