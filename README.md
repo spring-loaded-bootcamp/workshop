@@ -305,40 +305,59 @@ Docker needs to be running for this part:
 ```
 
 ```bash
-docker run -p 8080:8080 -p 8081:8081 simple:0.0.1-SNAPSHOT
+docker run -p 8080:8080 simple:0.0.1-SNAPSHOT
 ```
 > ctrl+c to stop it
 
-## Check the stats
+## Hello world?
 
-```bash
-docker ps #To get the containerId
-docker stats <containerId>
+Lets update our code to use configurable values!
+
+```java
+package com.example.modulith.simple.hello;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+@ResponseBody
+class HelloController {
+
+    @Value("${hello.text}")
+    private String helloText;
+
+    @GetMapping("/hello")
+    String hello (){
+        // refactor and rebuild
+        return helloText ;
+    }
+}
 ```
-
-## Build a smaller image
-
-```bash
-sdk install java 23.0.8.r17-nik
-sdk use java 23.0.8.r17-nik 
-./mvnw -Pnative spring-boot:build-image
-```
-> How come this didn't work?
-
-## Update properties
+> HelloController.java
 
 ```text
-management.server.port=8081
+spring.application.name=demo
+
+management.endpoints.web.exposure.include=*
+management.endpoint.health.show-details=always
+management.endpoint.env.show-values=always
+management.info.env.enabled=true
+management.info.java.enabled=true
+management.info.os.enabled=true
+management.info.process.enabled=true
+server.port=8080
+
+hello.text=Hujambo!?!?
 ```
-> Remove that line from src/main/resources/application.properties
+> src/main/resource/application.properties
 
-Try again
+### v0.0.4
 
-```bash
-./mvnw -Pnative spring-boot:build-image
-```
+## Spring Cloud Gateway
 
-### v0.0.3
+
 
 ## Let's talk about AOT, CDS, and Native Images
 
