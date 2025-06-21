@@ -414,7 +414,7 @@ server.port=8080
 
 hello.text=Hujambo!?!?
 
-spring.config.import=configserver:
+spring.config.import=optional:configserver:
 ```
 > src/main/resources/application.properties
 
