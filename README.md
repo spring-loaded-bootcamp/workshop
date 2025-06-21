@@ -483,16 +483,68 @@ git clone https://github.com/spring-loaded-bootcamp/compose
 docker compose up -d
 ```
 
-
 ## Spring Cloud Gateway
 
-## Config Refresh
+[Create a gateway](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.5.3&packaging=jar&jvmVersion=17&groupId=com.example.service&artifactId=gateway&name=&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.service.gateway&dependencies=cloud-gateway-reactive,actuator,cloud-config-client)
+
+```bash
+unzip ~/Downloads/gateway.zip
+cd gateway
+sdk use java 17.0.15-librca
+sdk env init
+idea .
+```
+
+```text
+spring.application.name=gateway
+spring.config.import=optional:configserver:
+```
+> src/main/resources/application.properties
 
 ## Ngrok
 
+[Ngrok admin](localhost:4040)
+
+## Discovery
+
+[Eureka](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.5.3&packaging=jar&jvmVersion=17&groupId=com.example.service&artifactId=discovery&name=&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.service.discovery&dependencies=cloud-eureka-server,cloud-config-client,actuator)
+
+```java
+package com.example.service.discovery;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+
+@SpringBootApplication
+@EnableEurekaServer
+public class Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+
+}
+```
+> Application.java
+
+```text
+spring.application.name=discovery
+spring.config.import=optional:configserver:
+server.port=8761
+```
+
+## Admin
+
+
+
 ## Observability
 
-## Spring AI
+## Persistence & AI
+
+[With Redis & Ollama](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.5.3&packaging=jar&jvmVersion=17&groupId=com.example.service&artifactId=persistent&name=persistent&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.service.persistent&dependencies=web,actuator,data-redis-reactive,modulith,spring-ai-ollama,cloud-config-client,cloud-eureka)
+
+
 
 ## Let's talk about AOT, CDS, and Native Images
 
